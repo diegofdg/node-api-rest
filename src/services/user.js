@@ -12,4 +12,10 @@ const createUser = async (user) => {
   return await userProvider.createUser(user);
 };
 
-module.exports = { getUser, createUser };
+const validateUser = async (name, password) => {
+  const userFound = await userProvider.validateUser({ name, password });
+  return userFound;
+};
+
+
+module.exports = { getUser, createUser, validateUser };
