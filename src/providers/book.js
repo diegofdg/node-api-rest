@@ -13,7 +13,8 @@ const getBooks = async () => {
 
 const createBook = async (book) => {
   try {
-    const newBook = await Book.create(book);
+    const libraryId = book.library;
+    const newBook = await Book.create({...book, LibraryId: libraryId});
     return newBook;
   } catch (err) {
     console.error("Error when creating Book", err);
@@ -33,10 +34,10 @@ const getBook = async (bookId) => {
 
 const updateBook = async (id, book) => {
   try {
-    const updateBook = await Book.update(book,{ where: { id } });
+    const updateBook = await Book.update( book, { where: { id } } );
     return book;
   } catch (err) {
-    console.error("Error when creating Book", err);
+    console.error("Error when updating Book", err);
     throw err;
   }
 };
