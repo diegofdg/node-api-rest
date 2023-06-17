@@ -49,5 +49,14 @@ const updateBook = async (req, res) => {
   }
 };
 
+const deleteBook = async (req, res) => {
+  try {
+    await bookService.deleteBook(req.params.bookId);
+    res.json({ action: "deleteBook", message: "sucessful" });
+  } catch (err) {
+    res.status(500).json({ action: "deleteBook", error: err.message });
+  }
+};
 
-module.exports = { getBooks, createBook, getBook, updateBook };
+
+module.exports = { getBooks, createBook, getBook, updateBook, deleteBook };

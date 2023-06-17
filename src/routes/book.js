@@ -7,5 +7,6 @@ router.get("/", bookController.getBooks);
 router.get("/:bookId", bookController.getBook);
 router.post("/", jwtValidMDW, bookController.createBook);
 router.put("/:bookId", jwtValidMDW, bookController.updateBook);  
+router.delete("/:bookId", jwtValidMDW, bookController.deleteBook);  
 
 module.exports = router;

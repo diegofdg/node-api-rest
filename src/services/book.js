@@ -24,4 +24,8 @@ const updateBook = async (id, book) => {
   return await bookProvider.updateBook(id, book);
 };
 
-module.exports = { getBooks, getBook, createBook, updateBook };
+const deleteBook = async (id) => {
+  return await bookProvider.deleteBook(id);
+};
+
+module.exports = { getBooks, getBook, createBook, updateBook, deleteBook };

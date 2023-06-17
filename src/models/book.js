@@ -26,6 +26,10 @@ const Book = sequelize.define("Books", {
   library: {
     type: DataTypes.INTEGER,
     defaultValue: null,
+  },
+  status: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: 1
   }
 });
 
