@@ -8,8 +8,20 @@ const getBooks = async () => {
   return books;
 };
 
+const getBook = async (bookId) => {
+  const book = await bookProvider.getBook(bookId);
+  if (book) {
+    console.log(book);
+  }
+  return book;
+};
+
 const createBook = async (book) => {
   return await bookProvider.createBook(book);
 };
 
-module.exports = { getBooks, createBook };
+const updateBook = async (id, book) => {
+  return await bookProvider.updateBook(id, book);
+};
+
+module.exports = { getBooks, getBook, createBook, updateBook };

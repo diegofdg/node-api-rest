@@ -22,4 +22,32 @@ const createBook = async (req, res) => {
   }
 };
 
-module.exports = { getBooks, createBook };
+const getBook = async (req, res) => {
+  try {
+    const book = await bookService.getBook(req.params.bookId);
+    if (!book) {
+      res.status(404).json({ action: "getBook", error: "Book Not Found" });
+    } else {
+      res.json(book);
+    }
+  } catch (err) {
+    res.status(500).json({ action: "getBook", error: err.message });
+  }
+};
+
+const updateBook = async (req, res) => {
+  try {
+    const book = await bookService.getBook(req.params.bookId);
+    if (!book) {
+      res.status(404).json({ action: "updateBook", error: "Book Not Found" });
+    } else {
+      const updatedBook = await bookService.updateBook(req.params.bookId, req.body);
+      res.json(updatedBook);
+    }
+  } catch (err) {
+    res.status(500).json({ action: "updateBook", error: err.message });
+  }
+};
+
+
+module.exports = { getBooks, createBook, getBook, updateBook };
