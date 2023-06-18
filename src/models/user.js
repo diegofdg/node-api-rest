@@ -10,10 +10,20 @@ const User = sequelize.define("Users", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+			notEmpty:{
+				msg: 'name cannot be empty.'
+			}
+		}
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+			notEmpty:{
+				msg: 'password cannot be empty.'
+			}
+		}
   }
 });
 

@@ -1,5 +1,9 @@
 const { bookProvider } = require("../providers");
 
+const createBook = async (book) => {
+  return await bookProvider.createBook(book);
+};
+
 const getBooks = async () => {
   const books = await bookProvider.getBooks();
   if (books) {
@@ -14,10 +18,6 @@ const getBook = async (bookId) => {
     console.log(book);
   }
   return book;
-};
-
-const createBook = async (book) => {
-  return await bookProvider.createBook(book);
 };
 
 const updateBook = async (id, book) => {

@@ -17,13 +17,11 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello World</h1>");
 });
 
-//Descomentar la siguiente linea para agregar o visualizar los usuarios registrados
-app.use("/user", userRouter);
-//app.use("/user", authRouter);
+//Descomentar la siguiente linea para agregar un usuario y luego volver a comentarla
+//app.use("/user", userRouter);
+app.use("/user", authRouter);
 app.use("/book", bookRouter);
 app.use("/library", libraryRouter);
-
-// TODO: no me toma la relacion entre library y book
 
 app.listen(PORT, async () => {
   await initializeDB();

@@ -1,5 +1,14 @@
 const { bookService } = require("../services");
 
+const createBook = async (req, res) => {
+  try {
+    const newBook = await bookService.createBook(req.body);
+    res.json(newBook);
+  } catch (err) {
+    res.status(500).json({ action: "createBook", error: err.message });
+  }
+};
+
 const getBooks = async (req, res) => {
   try {
     const books = await bookService.getBooks();
@@ -10,15 +19,6 @@ const getBooks = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ action: "getBooks", error: err.message });
-  }
-};
-
-const createBook = async (req, res) => {
-  try {
-    const newBook = await bookService.createBook(req.body);
-    res.json(newBook);
-  } catch (err) {
-    res.status(500).json({ action: "createBook", error: err.message });
   }
 };
 

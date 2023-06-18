@@ -1,5 +1,9 @@
 const { libraryProvider } = require("../providers");
 
+const createLibrary = async (library) => {
+  return await libraryProvider.createLibrary(library);
+};
+
 const getLibraries = async () => {
   const libraries = await libraryProvider.getLibraries();
   if (libraries) {
@@ -14,10 +18,6 @@ const getLibrary = async (libraryId) => {
     console.log(library);
   }
   return library;
-};
-
-const createLibrary = async (library) => {
-  return await libraryProvider.createLibrary(library);
 };
 
 const updateLibrary = async (id, library) => {
