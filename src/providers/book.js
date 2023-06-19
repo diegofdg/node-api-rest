@@ -75,4 +75,4 @@ const deleteBook = async (id) => {
   }
 };
 
-module.exports = { getBooks, createBook, getBook, updateBook, deleteBook };
+module.exports = { createBook, getBooks, getBook, updateBook, deleteBook };

@@ -1,6 +1,5 @@
 const express = require("express");
-
-const { userRouter, authRouter, bookRouter, libraryRouter } = require("./routes");
+const { authRouter, bookRouter, libraryRouter } = require("./routes");
 const loggingMdw = require("./middleware/logging");
 const { initializeDB } = require("./config/db-config");
 
@@ -12,13 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(loggingMdw);
 
-
 app.get("/", (req, res) => {
   res.send("<h1>Hello World</h1>");
 });
 
-//Descomentar la siguiente linea para agregar un usuario y luego volver a comentarla
-//app.use("/user", userRouter);
 app.use("/user", authRouter);
 app.use("/book", bookRouter);
 app.use("/library", libraryRouter);

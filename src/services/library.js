@@ -5,19 +5,11 @@ const createLibrary = async (library) => {
 };
 
 const getLibraries = async () => {
-  const libraries = await libraryProvider.getLibraries();
-  if (libraries) {
-    console.log(libraries);
-  }
-  return libraries;
+  return await libraryProvider.getLibraries();
 };
 
 const getLibrary = async (libraryId) => {
-  const library = await libraryProvider.getLibrary(libraryId);
-  if (library) {
-    console.log(library);
-  }
-  return library;
+  return await libraryProvider.getLibrary(libraryId);
 };
 
 const updateLibrary = async (id, library) => {
@@ -28,4 +20,4 @@ const deleteLibrary = async (id) => {
   return await libraryProvider.deleteLibrary(id);
 };
 
-module.exports = { getLibraries, getLibrary, createLibrary, updateLibrary, deleteLibrary };
+module.exports = { createLibrary, getLibraries, getLibrary, updateLibrary, deleteLibrary };

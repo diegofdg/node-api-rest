@@ -5,19 +5,11 @@ const createBook = async (book) => {
 };
 
 const getBooks = async () => {
-  const books = await bookProvider.getBooks();
-  if (books) {
-    console.log(books);
-  }
-  return books;
+  return await bookProvider.getBooks();
 };
 
 const getBook = async (bookId) => {
-  const book = await bookProvider.getBook(bookId);
-  if (book) {
-    console.log(book);
-  }
-  return book;
+  return await bookProvider.getBook(bookId);
 };
 
 const updateBook = async (id, book) => {
@@ -28,4 +20,4 @@ const deleteBook = async (id) => {
   return await bookProvider.deleteBook(id);
 };
 
-module.exports = { getBooks, getBook, createBook, updateBook, deleteBook };
+module.exports = { createBook, getBooks, getBook, updateBook, deleteBook };

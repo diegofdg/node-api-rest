@@ -1,9 +1,9 @@
-const SERVER_SECRET = "SecretoQueSoloConoceElServer";
-
 const passport = require("passport");
 const passportJwt = require("passport-jwt");
 const JWTStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
+
+const SERVER_SECRET = "PalabraSecreta";
 
 passport.use(
   new JWTStrategy(
@@ -20,4 +20,4 @@ passport.use(
 
 const jwtValidMDW = passport.authenticate("jwt", { session: false });
 
-module.exports = { jwtValidMDW, SERVER_SECRET };
+module.exports = { SERVER_SECRET, jwtValidMDW };

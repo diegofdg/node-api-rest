@@ -87,4 +87,4 @@ const deleteLibrary = async (id) => {
   }
 };
 
-module.exports = { getLibraries, createLibrary, getLibrary, updateLibrary, deleteLibrary };
+module.exports = { createLibrary, getLibraries, getLibrary, updateLibrary, deleteLibrary };
