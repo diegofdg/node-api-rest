@@ -108,3 +108,39 @@ Debe existir un usuario con name: admin y password: admin
 * Describir el proceso de desarrollo. (Cómo fueron fueron creados los archivos y por qué)
 * Bonus:
   * Que haya validación de las entidades al momento de crearse/actualizarse
+
+
+## Descripción del proceso de desarrollo
+Para llevar adelante este ejercicio realicé los siguientes pasos que detallo a continuación:
+<ol>
+  <li>
+    Instalación de las dependencias del proyecto y creación del servidor
+  </li>
+  <li>
+    Creación del modelo User, su ruteo, controlador, service y provider y la conexión a la Base de Datos
+  </li>
+  <li>
+    Implementación del login de usuario devolviendo un token en caso de ser exitoso
+  </li>
+  <li>
+    Creación del modelo Book, su ruteo, controlador, service y provider y la conexión a la Base de Datos. Protegiendo las rutas de create, update y delete para que solo puedan ser utilizadas por usuarios logueados.
+  </li>
+  <li>
+    Creación del modelo Library, su ruteo, controlador, service y provider y la conexión a la Base de Datos. Protegiendo las rutas de create, update y delete para que solo puedan ser utilizadas por usuarios logueados.
+  </li>
+  <li>
+    Moviendo el ruteo, controlador, service y provider de User al de Auth
+  </li>
+</ol>
+ 
+### Estructura del proyecto
+A continuación se define una breve descripción de las carpetas del proyecto y sus archivos:
+* <b>/src</b>: esta es la carpeta principal del proyecto donde se encuentran las demás que serán detalladas a posteriori. También aquí se encuentra el archivo principal del proyecto (app.js) que contiene la creación del servidor y sus configuraciones.
+* <b>/config</b>: en esta carpeta se encuentra un único archivo llamado db-config.js que contiene la configuración necesaria para conectar el proyecto con la base de datos.
+* <b>/controllers</b>: en esta carpeta se encuentran los archivos controllers del proyecto (auth, book y library) los cuales se encargan de manejar la respuesta de la api.
+* <b>/middleware</b>: en esta carpeta se encuentran dos archivos que funcionan como middleware. Uno es auth.mdw.js que se utiliza para proteger las rutas en las que se requiera estar logueado para utilizarlas, como por ejemplo la creación de un book o library. El segundo archivo logging.js es un middleware que se utiliza para obtener el token que se envía en los headers de la request.
+* <b>/models</b>: en esta carpeta se encuentra un archivo por cada modelo de las entidades del proyecto (book.js , library.js , user.js).
+* <b>/providers</b>: en esta carpeta se encuentran los archivos providers del proyecto (auth, book y library) los cuales se encargan de realizar la llamada a la base de datos.
+* <b>/routes</b>: en esta carpeta se encuentran los archivos con el ruteo del proyecto (auth, book y library) los cuales se encargan de definir las rutas del proyecto, definiendo los métodos permitidos y la protección de algunos de ellos para que solamente puedan ser accedidos por un usuario logueado.
+* <b>/services</b>:en esta carpeta se encuentran los archivos services del proyecto (auth, book y library) los cuales se encargan de la lógica del negocio.
+
