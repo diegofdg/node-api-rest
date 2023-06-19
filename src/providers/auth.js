@@ -1,15 +1,5 @@
 const { User } = require("../models");
 
-const createUser = async (user) => {
-  try {
-    const newUser = await User.create(user);
-    return newUser;
-  } catch (err) {
-    console.error("Error when creating User", err);
-    throw err;
-  }
-};
-
 const login = async (user) => {
   try {
     const loginUser = await User.findOne({
@@ -24,4 +14,4 @@ const login = async (user) => {
   }
 };
 
-module.exports = { createUser, login };
+module.exports = { login };
