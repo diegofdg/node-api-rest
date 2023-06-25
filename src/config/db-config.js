@@ -8,11 +8,10 @@ const sequelize = new Sequelize({
 const initializeDB = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.query("SELECT 2+2 as result;");
-    console.log("Conexión a la base de datos establecida");
+    console.log("connected to sqlite!");
     await sequelize.sync({ force: false });
   } catch (error) {
-    console.error("Hubo un error al inicializar la base de datos", error);
+    console.error("connection error", error);
   }
 };
 

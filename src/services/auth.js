@@ -10,14 +10,20 @@ const login = async (user) => {
   } else if (user.admin == 1){
     const name = user.name;
     const token = jwt.sign({ name, role: "Admin" }, SERVER_SECRET, {});
-    console.log("Es admin");
     return { name, token }
   } else {
     const name = user.name;
     const token = jwt.sign({ name, role: "User" }, SERVER_SECRET, { expiresIn: "1m" });
-    console.log("No es admin");
     return { name, token }
   }
 };
 
-module.exports = { login };
+const checkAdminUser = async () => {
+  return await authProvider.checkAdminUser();
+};
+
+const createAdminUser = async () => {
+  return await authProvider.createAdminUser();
+};
+
+module.exports = { login, checkAdminUser, createAdminUser };

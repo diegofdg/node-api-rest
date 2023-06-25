@@ -14,4 +14,31 @@ const login = async (user) => {
   }
 };
 
-module.exports = { login };
+const checkAdminUser = async () => {
+  try {
+    const adminUser = await User.findOne({
+      where: {
+        name: "admin"
+      }
+    });
+    return adminUser;
+  } catch (err) {
+    console.error("Error when fetching Books", err);
+    throw err;
+  }
+};
+
+const createAdminUser = async () => {
+  try {
+    await User.create({
+      name: "admin",
+      password: "admin",
+      admin: true
+    });
+  } catch (err) {
+    console.error("Error when creating admin user", err);
+    throw err;
+  }
+};
+
+module.exports = { login, checkAdminUser, createAdminUser };

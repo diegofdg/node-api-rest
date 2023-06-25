@@ -13,4 +13,17 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const checkAdminUser = async () => {
+  try {
+    const user = await authService.checkAdminUser();
+    if (!user) {
+      await authService.createAdminUser();
+    } else {
+      console.log("admin user already exists");
+    }
+  } catch (err) {
+    console.log({ action: "getAdminUser", error: err.message });
+  }
+};
+
+module.exports = { login, checkAdminUser };
