@@ -18,6 +18,7 @@ const checkAdminUser = async () => {
     const user = await authService.checkAdminUser();
     if (!user) {
       await authService.createAdminUser();
+      console.log("admin user created sucessfully");
     } else {
       console.log("admin user already exists");
     }

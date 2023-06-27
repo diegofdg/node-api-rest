@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const { SERVER_SECRET } = require("../middleware/auth-mdw");
 const { User } = require("../models");
 
 const login = async (user) => {
@@ -7,9 +9,20 @@ const login = async (user) => {
         name: user.name,
         password: user.password
       }});
-    return loginUser;
+
+    if (!loginUser) {
+    return null;
+    } else if (loginUser.admin == true){
+      const name = loginUser.name;
+      const token = jwt.sign({ name, role: "Admin" }, SERVER_SECRET, {});
+      return { name, token }
+    } else {
+      const name = loginUser.name;
+      const token = jwt.sign({ name, role: "User" }, SERVER_SECRET, { expiresIn: "1m" });
+      return { name, token }
+    }
   } catch (err) {
-    console.error("Error when fetching Book", err);
+    console.error("Error when fetching admin user", err);
     throw err;
   }
 };
@@ -23,7 +36,7 @@ const checkAdminUser = async () => {
     });
     return adminUser;
   } catch (err) {
-    console.error("Error when fetching Books", err);
+    console.error("Error when checking admin user", err);
     throw err;
   }
 };
@@ -33,7 +46,7 @@ const createAdminUser = async () => {
     await User.create({
       name: "admin",
       password: "admin",
-      admin: true
+      admin: 1
     });
   } catch (err) {
     console.error("Error when creating admin user", err);
