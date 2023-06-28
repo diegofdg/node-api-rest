@@ -138,9 +138,132 @@ A continuación se define una breve descripción de las carpetas del proyecto y 
 * <b>/src</b>: esta es la carpeta principal del proyecto donde se encuentran las demás que serán detalladas a posteriori. También aquí se encuentra el archivo principal del proyecto (app.js) que contiene la creación del servidor y sus configuraciones.
 * <b>/config</b>: en esta carpeta se encuentra un único archivo llamado db-config.js que contiene la configuración necesaria para conectar el proyecto con la base de datos.
 * <b>/controllers</b>: en esta carpeta se encuentran los archivos controllers del proyecto (auth, book y library) los cuales se encargan de manejar la respuesta de la api.
-* <b>/middleware</b>: en esta carpeta se encuentran dos archivos que funcionan como middleware. Uno es auth.mdw.js que se utiliza para proteger las rutas en las que se requiera estar logueado para utilizarlas, como por ejemplo la creación de un book o library. El segundo archivo logging.js es un middleware que se utiliza para obtener el token que se envía en los headers de la request.
+* <b>/middleware</b>: en esta carpeta se encuentra un archivo que funciona como middleware (auth.mdw.js) que se utiliza para proteger las rutas en las que se requiera estar logueado para utilizarlas.
 * <b>/models</b>: en esta carpeta se encuentra un archivo por cada modelo de las entidades del proyecto (book.js , library.js , user.js).
 * <b>/providers</b>: en esta carpeta se encuentran los archivos providers del proyecto (auth, book y library) los cuales se encargan de realizar la llamada a la base de datos.
 * <b>/routes</b>: en esta carpeta se encuentran los archivos con el ruteo del proyecto (auth, book y library) los cuales se encargan de definir las rutas del proyecto, definiendo los métodos permitidos y la protección de algunos de ellos para que solamente puedan ser accedidos por un usuario logueado.
 * <b>/services</b>:en esta carpeta se encuentran los archivos services del proyecto (auth, book y library) los cuales se encargan de la lógica del negocio.
 
+### API endpoints
+
+`POST /user`
+
+Se utiliza para realizar el login de usuario.
+Devuelve un token.
+Se debe enviar en el body las propiedades:
+
+    name: 'admin',
+    password: 'admin'
+
+---
+
+`GET /library`
+
+Lista todas las bibliotecas registradas en la base de datos.
+
+---
+
+`GET /library/id`
+
+Lista los datos de la biblioteca cuyo id coincide con el valor que se envía en la url.
+
+---
+
+`POST /library`
+
+Se utiliza para crear una biblioteca. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+y en el body las propiedades:
+
+    name: '', (string)
+    location: '', (string)
+    phone: '' (string)
+
+---
+
+`PUT /library/id`
+
+Se utiliza para crear actualizar una biblioteca cuyo id coincide con el valor que se envía en la url. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+y en el body las propiedades:
+
+    name: '', (string)
+    location: '', (string)
+    phone: '' (string)
+
+---
+
+`DELETE /library/id`
+
+Realiza el borrado lógico de la biblioteca cuyo id coincide con el valor que se envía en la url. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+---
+
+`GET /book`
+
+Lista todos los libros registrados en la base de datos mostrando en qué biblioteca se encuentran.
+
+---
+`GET /book/id`
+
+Lista los datos del libro cuyo id coincide con el valor que se envía en la url.
+
+---
+
+`POST /book`
+
+Se utiliza para crear un libro. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+y en el body las propiedades:
+
+    isbn: '', (int)
+    titulo: '', (string)
+    autor: '', (string)
+    year: '', (string(4))
+    library: '' (int)
+
+---
+
+`PUT /book/id`
+
+Se utiliza para crear actualizar un libro cuyo id coincide con el valor que se envía en la url. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+y en el body las propiedades:
+
+    isbn: '', (int)
+    titulo: '', (string)
+    autor: '', (string)
+    year: '', (string(4))
+    library: '' (int)
+
+---
+
+`DELETE /book/id`
+
+Realiza el borrado lógico del libro cuyo id coincide con el valor que se envía en la url. Solamente permitido para los usuarios que han realizado un login exitoso y que tienen un token vigente.
+
+Se debe enviar en el header la propiedad:
+
+    Authorization: 'bearer '+ token
+
+---
